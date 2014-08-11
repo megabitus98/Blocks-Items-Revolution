@@ -2,6 +2,7 @@ package com.mega.bir;
 
 import com.mega.bir.block.BlocksManager;
 import com.mega.bir.handler.ConfigHandler;
+import com.mega.bir.handler.RegisterHandler;
 import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Reference;
 import com.mega.bir.item.ItemsManager;
@@ -13,6 +14,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.util.EnumHelper;
 
 /**
  * Created by Megabitus on 8/10/2014 and hour 12.
@@ -30,8 +33,7 @@ public class MainClass {
     public void preInit(FMLPreInitializationEvent event) {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
-        ItemsManager.register();
-        BlocksManager.register();
+        RegisterHandler.registerMain();
         LogHelper.info("Has passed the PreInitialization!");
     }
     

@@ -17,6 +17,7 @@ public class ConfigHandler{
     public static Configuration configuration;
     //Config statements
     public static boolean fuelReq;
+    public static int damage;
     //End of config statments
     public static void init(File configFile) {
     // Create the configuration object from the given configuration file
@@ -27,7 +28,9 @@ public class ConfigHandler{
         }
     }
     private static void loadConfiguration(){
-        fuelReq = configuration.getBoolean("configValue", Configuration.CATEGORY_GENERAL, false, "Do the chest need power to work?|True=yes,False=no");
+        fuelReq = configuration.getBoolean("Fuel Req", Configuration.CATEGORY_GENERAL, false, "Do the chest need power to work?|True=yes,False=no");
+        damage = configuration.getInt("configValue", "Development Settings", 0, 0, 1, "Does the Dagger Of Sight 1 jit kill?|True=yes,False=no");
+
         if (configuration.hasChanged())
         {
             LogHelper.info("Has saved the configuration file!");

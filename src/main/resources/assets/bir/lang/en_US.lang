@@ -1,6 +1,6 @@
 item.bir:Renamer.name=Renamer
 item.bir:Eye.name=Eye
-item.bir:Dagger_Of_Sight.name=Dagger Of Sight
+item.Dagger_Of_Sight.name=Dagger Of Sight
 tile.bir:Inter_Chest.name=Inter Chest
 tile.bir:Telotrite_Ore.name=Telotrite Ore
 itemGroup.bir=Blocks & Items Revolution
