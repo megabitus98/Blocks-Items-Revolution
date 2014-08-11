@@ -11,11 +11,13 @@ import net.minecraft.client.renderer.texture.IIconRegister;
  * Created by Megabitus on 8/11/2014 and hour 10.
  */
 
-public class BlockIC extends Block{
-    public BlockIC(Material material){
+public class BlockBIR extends Block{
+    public BlockBIR(Material material)
+    {
         super(material);
     }
-    public BlockIC(){
+    public BlockBIR()
+    {
         this(Material.rock);
     }
     @Override

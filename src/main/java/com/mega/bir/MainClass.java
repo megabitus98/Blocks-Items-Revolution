@@ -1,6 +1,11 @@
 package com.mega.bir;
 
+import com.mega.bir.handler.ConfigHandler;
+import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Reference;
+import com.mega.bir.init.ModBlocks;
+import com.mega.bir.init.ModItems;
+import com.mega.bir.proxy.IProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;

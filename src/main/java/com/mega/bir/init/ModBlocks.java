@@ -1,6 +1,6 @@
 package com.mega.bir.init;
 
-import com.mega.bir.block.BlockIC;
+import com.mega.bir.block.BlockBIR;
 import com.mega.bir.block.BlockInterChest;
 import com.mega.bir.helping.Names;
 import com.mega.bir.helping.Reference;
@@ -12,9 +12,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks {
-    public static final BlockIC interChest = new BlockInterChest();
-
-    public static void register(){
+    public static final BlockBIR interChest = new BlockInterChest();
+    public static void register()
+    {
         GameRegistry.registerBlock(interChest, Names.Block_Inter_Chest);
     }
 }
