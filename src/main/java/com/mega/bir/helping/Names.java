@@ -7,6 +7,9 @@ package com.mega.bir.helping;
 public class Names {
     //Items
     public static final String Item_Renamer = "Renamer";
+    public static final String Item_Eye = "Eye";
+    public static final String Item_Dagger_Of_Sight = "Dagger_Of_Sight";
     //Blocks
     public static final String Block_Inter_Chest = "Inter_Chest";
+    public static final String Block_Telotrite_Ore = "Telotrite_Ore";
 }
