@@ -1,4 +1,4 @@
-package com.mega.bir.creativetab;
+package com.mega.bir.mainPackage;
 
 import com.mega.bir.helping.Reference;
 import com.mega.bir.init.ModItems;

@@ -1,4 +1,4 @@
-package com.mega.bir;
+package com.mega.bir.mainPackage;
 
 import com.mega.bir.handler.ConfigHandler;
 import com.mega.bir.helping.LogHelper;

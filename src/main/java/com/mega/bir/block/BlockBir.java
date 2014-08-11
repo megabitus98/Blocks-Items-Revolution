@@ -1,6 +1,6 @@
 package com.mega.bir.block;
 
-import com.mega.bir.creativetab.CreativeTabBir;
+import com.mega.bir.mainPackage.CreativeTabBir;
 import com.mega.bir.helping.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
