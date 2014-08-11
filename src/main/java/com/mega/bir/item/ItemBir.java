@@ -1,5 +1,6 @@
 package com.mega.bir.item;
 
+import com.mega.bir.creativetab.CreativeTabBir;
 import com.mega.bir.helping.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,9 +11,10 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by Megabitus on 8/11/2014 and hour 10.
  */
-public class ItemIC extends Item{
-    public ItemIC(){
+public class ItemBir extends Item{
+    public ItemBir(){
         super();
+        this.setCreativeTab(CreativeTabBir.BIR_TAB);
     }
     @Override
     public String getUnlocalizedName()

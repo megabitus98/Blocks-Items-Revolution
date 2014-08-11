@@ -2,7 +2,7 @@ package com.mega.bir.init;
 
 import com.mega.bir.helping.Names;
 import com.mega.bir.helping.Reference;
-import com.mega.bir.item.ItemIC;
+import com.mega.bir.item.ItemBir;
 import com.mega.bir.item.ItemRenamer;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -12,7 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModItems {
-    public static final ItemIC renamer = new ItemRenamer();
+    public static final ItemBir renamer = new ItemRenamer();
 
     public static void register(){
         GameRegistry.registerItem(renamer, Names.Item_Renamer);

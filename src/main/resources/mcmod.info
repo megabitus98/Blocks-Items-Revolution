@@ -1,0 +1,21 @@
+[
+{
+"modid": "BiR",
+"name": "Blocks & Items Revolution",
+"description": "PIt's a revolution of Blocks and Items!!!",
+"version": "1.0",
+"mcversion": "1.7.10",
+"url": "",
+"updateUrl": "",
+"authorList": [
+"megabitus"
+],
+"credits": "To pahimar for making the tutorials!!",
+"logoFile": "",
+"screenshots": [
+],
+"parent":"",
+"dependencies": [
+]
+}
+]
