@@ -1,0 +1,12 @@
+package com.mega.bir.helping;
+
+/**
+ * Created by Megabitus on 8/11/2014 and hour 13.
+ */
+
+public class Names {
+    //Items
+    public static final String Item_Renamer = "Renamer";
+    //Blocks
+    public static final String Block_Inter_Chest = "Inter_Chest";
+}
