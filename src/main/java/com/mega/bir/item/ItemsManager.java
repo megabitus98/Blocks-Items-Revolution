@@ -1,6 +1,7 @@
 package com.mega.bir.item;
 
 import com.mega.bir.MainClass;
+import com.mega.bir.handler.ToolsHandler;
 import com.mega.bir.helping.Names;
 import com.mega.bir.helping.Reference;
 import com.mega.bir.item.items.ItemDaggerOfSight;
@@ -18,7 +19,7 @@ import net.minecraft.item.Item;
 public class ItemsManager {
     public static final ItemBir renamer = new ItemRenamer();
     public static final ItemBir eye = new ItemEye();
-    public static final Item daggerOfSight = new ItemDaggerOfSight(MainClass.Dagger);
+    public static final Item daggerOfSight = new ItemDaggerOfSight(ToolsHandler.DaggerMaterial);
 
     public static void register(){
         GameRegistry.registerItem(renamer, Names.Item_Renamer);

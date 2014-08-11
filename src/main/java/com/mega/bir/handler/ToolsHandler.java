@@ -8,7 +8,5 @@ import net.minecraftforge.common.util.EnumHelper;
  */
 
 public class ToolsHandler {
-    private float DMG = 1.5F;
-
-    public final Item.ToolMaterial Dagger = EnumHelper.addToolMaterial("Dagger", 3, 151, 12.0F, DMG, 22);
+    public static final Item.ToolMaterial DaggerMaterial = EnumHelper.addToolMaterial("DaggerMaterial", 3, 151, 12.0F, 1.5F, 22);
 }
