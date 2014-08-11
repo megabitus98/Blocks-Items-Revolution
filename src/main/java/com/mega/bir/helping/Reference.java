@@ -1,9 +1,5 @@
 package com.mega.bir.helping;
 
-/**
- * Created by Megabitus on 8/11/2014 and hour 11.
- */
-
 public class Reference {
         public static final String MOD_ID = "BiR";
     public static final String MOD_NAME = "Blocks & Items Revolution";
