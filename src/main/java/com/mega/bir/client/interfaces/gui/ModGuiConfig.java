@@ -1,4 +1,4 @@
-package com.mega.bir.client.gui;
+package com.mega.bir.client.interfaces.gui;
 
 import com.mega.bir.handler.ConfigHandler;
 import com.mega.bir.helping.Reference;

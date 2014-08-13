@@ -1,6 +1,8 @@
 package com.mega.bir.handler;
 
 import com.mega.bir.block.BlocksManager;
+import com.mega.bir.block.tileentity.TileEntityMachine;
+import com.mega.bir.helping.Names;
 import com.mega.bir.item.ItemsManager;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
@@ -18,6 +20,7 @@ public class RegisterHandler {
         ItemsManager.register();
         recipes();
         events();
+        tileEntities();
     }
 
     private static void events(){
@@ -25,6 +28,9 @@ public class RegisterHandler {
     }
     private static void recipes(){
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemsManager.daggerOfSight), "stickWood", "ingotIron"));
+    }
+    private static void tileEntities(){
+        GameRegistry.registerTileEntity(TileEntityMachine.class, Names.Tile_Entity_Machine);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.mega.bir.client.gui;
+package com.mega.bir.client.interfaces.gui;
 
 import cpw.mods.fml.client.IModGuiFactory;
 import net.minecraft.client.Minecraft;
