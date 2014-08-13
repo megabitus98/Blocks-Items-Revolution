@@ -7,8 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 
 /**
  * Created by Megabitus on 8/11/2014 and hour 23.
@@ -115,5 +118,35 @@ public class TileEntityMachine extends TileEntity implements IInventory{
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_){
         return true;
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound compound) {
+        super.writeToNBT(compound);
+        NBTTagList items = new NBTTagList();
+        for(int i = 0; i < getSizeInventory(); i++){
+            ItemStack stack = getStackInSlot(i);
+            if(stack != null){
+                NBTTagCompound item = new NBTTagCompound();
+                item.setByte("Slot", (byte)i);
+                stack.writeToNBT(item);
+                items.appendTag(item);
+            }
+        }
+        compound.setTag("Items", items);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+        for(int i = 0; i < items.tagCount(); i++){
+            NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
+            int slot = item.getByte("Slot");
+            if(slot >= 0 && slot < getSizeInventory()){
+                setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+            }
+        }
+
     }
 }
