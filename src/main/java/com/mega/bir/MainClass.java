@@ -2,6 +2,7 @@ package com.mega.bir;
 
 import com.mega.bir.block.BlocksManager;
 import com.mega.bir.handler.ConfigHandler;
+import com.mega.bir.handler.GuiHandler;
 import com.mega.bir.handler.RegisterHandler;
 import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Reference;
@@ -40,6 +41,7 @@ public class MainClass {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        new GuiHandler();
         LogHelper.info("Has passed the Initialization!");
     }
 
