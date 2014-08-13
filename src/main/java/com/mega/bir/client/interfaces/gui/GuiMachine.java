@@ -21,8 +21,8 @@ public class GuiMachine extends GuiContainer{
 
     public GuiMachine(InventoryPlayer invPlayer, TileEntityMachine machine){
         super(new ContainerMachine(invPlayer, machine));
-        xSize = 256;
-        ySize = 256;
+        xSize = 176;
+        ySize = 166;
     }
 
     @Override
