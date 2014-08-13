@@ -1,9 +1,12 @@
 package com.mega.bir.handler;
 
 import com.mega.bir.MainClass;
+import com.mega.bir.block.tileentity.TileEntityInterChest;
 import com.mega.bir.block.tileentity.TileEntityMachine;
-import com.mega.bir.client.interfaces.containers.ContainerMachine;
-import com.mega.bir.client.interfaces.gui.GuiMachine;
+import com.mega.bir.client.interfaces.interchest.ContainerInterChest;
+import com.mega.bir.client.interfaces.interchest.GuiInterChest;
+import com.mega.bir.client.interfaces.machine.ContainerMachine;
+import com.mega.bir.client.interfaces.machine.GuiMachine;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +31,12 @@ public class GuiHandler implements IGuiHandler{
                     return new ContainerMachine(player.inventory, (TileEntityMachine)te);
                 }
                 break;
+            case 1:
+                te = world.getTileEntity(x,y,z);
+                if(te != null && te instanceof TileEntityInterChest){
+                    return new ContainerInterChest(player.inventory, (TileEntityInterChest)te);
+                }
+                break;
         }
         return null;
     }
@@ -39,6 +48,12 @@ public class GuiHandler implements IGuiHandler{
                 TileEntity te = world.getTileEntity(x,y,z);
                 if(te != null && te instanceof TileEntityMachine){
                     return new GuiMachine(player.inventory, (TileEntityMachine)te);
+                }
+                break;
+            case 1:
+                te = world.getTileEntity(x,y,z);
+                if(te != null && te instanceof TileEntityInterChest){
+                    return new GuiInterChest(player.inventory, (TileEntityInterChest)te);
                 }
                 break;
         }

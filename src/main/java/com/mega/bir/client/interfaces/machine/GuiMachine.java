@@ -1,7 +1,6 @@
-package com.mega.bir.client.interfaces.gui;
+package com.mega.bir.client.interfaces.machine;
 
 import com.mega.bir.block.tileentity.TileEntityMachine;
-import com.mega.bir.client.interfaces.containers.ContainerMachine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -30,5 +29,11 @@ public class GuiMachine extends GuiContainer{
         GL11.glColor4f(1, 1, 1, 1);
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
+        fontRendererObj.drawString("Machine", 8, 6, 0x404040);
+        fontRendererObj.drawString("Inventory", 100, 100, 0x404040);
     }
 }

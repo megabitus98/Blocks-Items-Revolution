@@ -1,4 +1,4 @@
-package com.mega.bir.client.interfaces.containers;
+package com.mega.bir.client.interfaces.machine;
 
 import com.mega.bir.block.tileentity.TileEntityMachine;
 
@@ -36,7 +36,7 @@ public class ContainerMachine extends Container{
         return machine.isUseableByPlayer(entityplayer);
     }
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_){
+    public ItemStack transferStackInSlot(EntityPlayer player, int i){
         return null;
     }
 }
