@@ -3,4 +3,5 @@ item.bir:Eye.name=Eye
 item.Dagger_Of_Sight.name=Dagger Of Sight
 tile.bir:Inter_Chest.name=Inter Chest
 tile.bir:Telotrite_Ore.name=Telotrite Ore
+tile.Machine.name=Machine
 itemGroup.bir=Blocks & Items Revolution

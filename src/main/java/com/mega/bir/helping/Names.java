@@ -12,4 +12,5 @@ public class Names {
     //Blocks
     public static final String Block_Inter_Chest = "Inter_Chest";
     public static final String Block_Telotrite_Ore = "Telotrite_Ore";
+    public static final String Block_Machine = "Machine";
 }
