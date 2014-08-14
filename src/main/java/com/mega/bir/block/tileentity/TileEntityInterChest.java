@@ -17,7 +17,9 @@ import java.io.PrintWriter;
 /**
  * Created by Megabitus on 8/13/2014 and hour 23.
  */
+
 public class TileEntityInterChest extends TileEntity implements IInventory{
+    public static String TextName;
     PrintWriter writer;
     private ItemStack[] items;
 
@@ -89,7 +91,9 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
     public void openInventory(){}
 
     @Override
-    public void closeInventory(){}
+    public void closeInventory(){
+
+    }
 
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_){
@@ -98,7 +102,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
-
+//TODO Save Chest text box!
         super.writeToNBT(compound);
         NBTTagList items = new NBTTagList();
         for(int i = 0; i < getSizeInventory(); i++){
@@ -121,10 +125,14 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
             }
         }
         compound.setTag("Items", items);
+        if(TextName != null){
+            compound.setString("Text", TextName);
+        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
+        //TODO ALSO READ FROM INTERNET THING!?
         super.readFromNBT(compound);
         NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
         for(int i = 0; i < items.tagCount(); i++){
@@ -134,6 +142,6 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
             }
         }
-
+        TextName = compound.getString("Text");
     }
 }

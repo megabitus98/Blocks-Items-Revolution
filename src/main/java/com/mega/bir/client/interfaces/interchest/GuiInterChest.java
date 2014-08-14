@@ -1,13 +1,12 @@
 package com.mega.bir.client.interfaces.interchest;
 
 import com.mega.bir.block.tileentity.TileEntityInterChest;
-import com.mega.bir.block.tileentity.TileEntityMachine;
-import com.mega.bir.client.interfaces.machine.ContainerMachine;
 import com.mega.bir.helping.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -21,17 +20,21 @@ import org.lwjgl.opengl.GL11;
 public class GuiInterChest extends GuiContainer{
 
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/inter_chest.png");
+    public String text;
+    private GuiTextField textfield;
 
     public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest machine){
         super(new ContainerInterChest(invPlayer, machine));
         xSize = 176;
         ySize = 166;
     }
+
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y){
         GL11.glColor4f(1, 1, 1, 1);
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        this.textfield.drawTextBox();
     }
 
     @Override
@@ -43,14 +46,58 @@ public class GuiInterChest extends GuiContainer{
     @Override
     public void initGui() {
         super.initGui();
+        text = TileEntityInterChest.TextName;
+        textfield = new GuiTextField(this.fontRendererObj, guiLeft + 7, guiTop + 43, 100,20);
+        textfield.setFocused(true);
+        textfield.setMaxStringLength(16);
+        if(text == null){
+            textfield.setText("Enter Text Here!");
+        }else{
+            textfield.setText(text);
+        }
         buttonList.clear();
-        buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 45, 60, 20, "Sync"));
+        buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
+    }
+
+    @Override
+    protected void keyTyped(char par1, int par2)
+    {
+        super.keyTyped(par1, par2);
+        if(par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode()){
+
+        }
+        this.textfield.textboxKeyTyped(par1, par2);
+    }
+
+    @Override
+    protected void mouseClicked(int x, int y, int btn) {
+        super.mouseClicked(x, y, btn);
+        this.textfield.mouseClicked(x, y, btn);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) {
         if(button.id == 0){
             LogHelper.info("Button with id 0 HAS BEEN CLICKED!");
+            //TODO Sync with other chests!
         }
+    }
+
+    @Override
+    public void updateScreen()
+    {
+        super.updateScreen();
+        this.textfield.updateCursorCounter();
+        if(org.lwjgl.input.Keyboard.isKeyDown(org.lwjgl.input.Keyboard.KEY_RETURN) || !textfield.isFocused()){
+            text = textfield.getText();
+            textfield.setFocused(false);
+        }
+        LogHelper.info("The text is: " + text);
+    }
+
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        TileEntityInterChest.TextName = text;
     }
 }
