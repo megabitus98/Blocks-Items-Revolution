@@ -41,6 +41,8 @@ public class MainClass {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        proxy.registerTileEntities();
+        proxy.registerEventHandlers();
         new GuiHandler();
         LogHelper.info("Has passed the Initialization!");
     }

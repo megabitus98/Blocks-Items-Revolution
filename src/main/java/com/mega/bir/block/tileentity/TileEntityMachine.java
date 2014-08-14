@@ -1,7 +1,7 @@
 package com.mega.bir.block.tileentity;
 
 import com.mega.bir.helping.LogHelper;
-import com.mega.bir.helping.Utilitys;
+import com.mega.bir.item.ItemsManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -18,10 +18,11 @@ import net.minecraftforge.common.util.Constants;
  */
 
 public class TileEntityMachine extends TileEntity implements IInventory{
+    public static final int INVENTORY_SIZE = 1;
     private ItemStack[] items;
 
     public TileEntityMachine(){
-        items = new ItemStack[1];
+        items = new ItemStack[INVENTORY_SIZE];
     }
 
     public boolean searchForBlock(World world, int x, int y, int z, Block block) {
@@ -42,9 +43,12 @@ public class TileEntityMachine extends TileEntity implements IInventory{
 
     @Override
     public void updateEntity() {
+        ItemStack itemstack = getStackInSlot(1);
         if (searchForBlock(worldObj, xCoord, yCoord, zCoord, Blocks.water)) {
             if (worldObj.isDaytime()) {
-                LogHelper.info("Block has found WATER!!! + DAY!!!!!");
+                if(itemstack.getItem().getUnlocalizedName() == ItemsManager.eye.getUnlocalizedName()){
+                    LogHelper.info("Block has found WATER!!! + DAY!!!!! + EYE!!!");
+                }
             }
         }
     }
@@ -147,6 +151,5 @@ public class TileEntityMachine extends TileEntity implements IInventory{
                 setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
             }
         }
-
     }
 }

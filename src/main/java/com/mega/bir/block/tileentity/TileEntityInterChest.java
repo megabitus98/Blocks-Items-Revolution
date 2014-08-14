@@ -11,6 +11,8 @@ import net.minecraftforge.common.util.Constants;
 import sun.misc.JavaIOAccess;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -18,13 +20,25 @@ import java.io.*;
  */
 
 public class TileEntityInterChest extends TileEntity implements IInventory{
+    public static final int INVENTORY_SIZE = 9;
     public static String TextName;
     PrintWriter writer;
     FileInputStream fstream;
     private ItemStack[] items;
 
     public TileEntityInterChest(){
-        items = new ItemStack[9];
+        items = new ItemStack[INVENTORY_SIZE];
+    }
+
+    public static boolean containsWhiteSpace(final String testCode){
+        if(testCode != null){
+            for(int i = 0; i < testCode.length(); i++){
+                if(Character.isWhitespace(testCode.charAt(i))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -126,7 +140,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 item.setByte("Slot", (byte)i);
                 stack.writeToNBT(item);
                 items.appendTag(item);
-                try {
+ /*               try {
                     writer = new PrintWriter(new FileWriter(TextName, true));
                     writer.write(stack.getItem().getUnlocalizedName() + " " + stack.stackSize);
                     writer.write('\n');
@@ -137,15 +151,15 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 }finally {
                     writer.close();
                 }
-            }
+   */         }
         }
         compound.setTag("Items", items);
-        if(TextName != null){
-            compound.setString("Text", TextName);
-        }else if(TextName == null){
+//        if(TextName != null){
+//            compound.setString("Text", TextName);
+//        }else if(TextName == null || TextName == " "){
             TextName = "Enter Text Here!";
-            compound.setString("Text", TextName);
-        }
+//            compound.setString("Text", TextName);
+//        }
     }
 
     @Override
@@ -161,5 +175,10 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
             }
         }
         TextName = compound.getString("Text");
+    }
+
+    @Override
+    public void updateEntity() {
+    //    LogHelper.fatal(containsWhiteSpace(TextName));
     }
 }

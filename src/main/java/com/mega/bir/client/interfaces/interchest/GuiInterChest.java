@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiInterChest extends GuiContainer{
 
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/inter_chest.png");
-    public String text = "Enter Text Here!";
+    public String text;
     private GuiTextField textfield;
 
     public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest machine){
@@ -87,9 +87,8 @@ public class GuiInterChest extends GuiContainer{
         if(org.lwjgl.input.Keyboard.isKeyDown(org.lwjgl.input.Keyboard.KEY_RETURN) || !textfield.isFocused()){
             text = textfield.getText();
             textfield.setFocused(false);
-        //    EntityPlayer.addChatMessage(new ChatComponentText("Text"));
+            LogHelper.info("The text is: " + text);
         }
-        LogHelper.info("The text is: " + text);
     }
 
     @Override

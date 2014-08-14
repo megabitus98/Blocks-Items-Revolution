@@ -21,19 +21,8 @@ public class RegisterHandler {
         BlocksManager.register();
         ItemsManager.register();
         recipes();
-        events();
-        tileEntities();
-    }
-
-    private static void events(){
-        MinecraftForge.EVENT_BUS.register(new EventsHandler());
     }
     private static void recipes(){
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemsManager.daggerOfSight), "stickWood", "ingotIron"));
     }
-    private static void tileEntities(){
-        GameRegistry.registerTileEntity(TileEntityMachine.class, Names.Tile_Entity_Machine);
-        GameRegistry.registerTileEntity(TileEntityInterChest.class, Names.Tile_Entity_Inter_Chest);
-    }
-
 }

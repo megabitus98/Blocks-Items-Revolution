@@ -5,5 +5,7 @@ package com.mega.bir.proxy;
  */
 
 public interface IProxy{
+    public abstract void registerTileEntities();
+    public abstract void registerEventHandlers();
 
 }

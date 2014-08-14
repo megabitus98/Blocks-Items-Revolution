@@ -25,7 +25,7 @@ public class ContainerInterChest extends Container{
             }
         }
 
-        for(int x = 0; x < 9; x++){
+        for(int x = 0; x < TileEntityInterChest.INVENTORY_SIZE; x++){
             addSlotToContainer(new Slot(machine, x, 8 + 18 * x, 22));
         }
     }
@@ -34,7 +34,42 @@ public class ContainerInterChest extends Container{
         return machine.isUseableByPlayer(entityplayer);
     }
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int i){
-        return null;
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
+        ItemStack itemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack slotItemStack = slot.getStack();
+            itemStack = slotItemStack.copy();
+
+            if (slotIndex < TileEntityInterChest.INVENTORY_SIZE)
+            {
+
+                if (!this.mergeItemStack(slotItemStack, 1, inventorySlots.size(), true))
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                if (!this.mergeItemStack(slotItemStack, 0, TileEntityInterChest.INVENTORY_SIZE, false))
+                {
+                    return null;
+                }
+            }
+
+            if (slotItemStack.stackSize == 0)
+            {
+                slot.putStack(null);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+        }
+
+        return itemStack;
     }
 }
+
