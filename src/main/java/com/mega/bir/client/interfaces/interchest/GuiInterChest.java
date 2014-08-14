@@ -35,6 +35,6 @@ public class GuiInterChest extends GuiContainer{
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         fontRendererObj.drawString("Inter Chest", 8, 6, 0x404040);
-        fontRendererObj.drawString("Inventory", 100, 100, 0x404040);
+        fontRendererObj.drawString("Inventory", 10, 66, 0x404040);
     }
 }

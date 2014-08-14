@@ -70,7 +70,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
 
     @Override
     public int getInventoryStackLimit(){
-        return 1;
+        return 64;
     }
 
     @Override

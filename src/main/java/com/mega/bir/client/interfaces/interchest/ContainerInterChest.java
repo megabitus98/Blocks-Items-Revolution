@@ -16,17 +16,17 @@ public class ContainerInterChest extends Container{
     public ContainerInterChest(InventoryPlayer invPlayer, TileEntityInterChest machine){
         this.machine = machine;
         for(int x = 0; x < 9; x++){
-            addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 142));
+            addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 136));
         }
 
         for(int y = 0; y < 3; y++){
             for(int x = 0; x < 9; x++){
-                addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 84 + y * 18));
+                addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 78 + y * 18));
             }
         }
 
         for(int x = 0; x < 9; x++){
-            addSlotToContainer(new Slot(machine, x, 79 + 18 * x, 34));
+            addSlotToContainer(new Slot(machine, x, 8 + 18 * x, 22));
         }
     }
     @Override

@@ -14,5 +14,6 @@ public class Names {
     public static final String Block_Telotrite_Ore = "Telotrite_Ore";
     public static final String Block_Machine = "Machine";
     //Tile Entityes
-    public static final String Tile_Entity_Machine = "machineTileEntity";
+    public static final String Tile_Entity_Machine = "tileEntityMachine";
+	public static final String Tile_Entity_Inter_Chest = "tileEntityInterChest";
 }
