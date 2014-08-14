@@ -1,7 +1,7 @@
-item.bir:Renamer.name=Renamer
-item.bir:Eye.name=Eye
-item.Dagger_Of_Sight.name=Dagger Of Sight
-tile.bir:Inter_Chest.name=Inter Chest
-tile.bir:Telotrite_Ore.name=Telotrite Ore
-tile.bir:Machine.name=Machine
+item.bir:renamer.name=Renamer
+item.bir:eye.name=Eye
+item.daggerOfSight.name=Dagger Of Sight
+tile.bir:interChest.name=Inter Chest
+tile.bir:telotriteOre.name=Telotrite Ore
+tile.bir:machine.name=Machine
 itemGroup.bir=Blocks & Items Revolution
