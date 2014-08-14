@@ -8,8 +8,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -20,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiInterChest extends GuiContainer{
 
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/inter_chest.png");
-    public String text;
+    public String text = "Enter Text Here!";
     private GuiTextField textfield;
 
     public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest machine){
@@ -50,11 +53,7 @@ public class GuiInterChest extends GuiContainer{
         textfield = new GuiTextField(this.fontRendererObj, guiLeft + 7, guiTop + 43, 100,20);
         textfield.setFocused(true);
         textfield.setMaxStringLength(16);
-        if(text == null){
-            textfield.setText("Enter Text Here!");
-        }else{
-            textfield.setText(text);
-        }
+        textfield.setText(text);
         buttonList.clear();
         buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
     }
@@ -62,11 +61,8 @@ public class GuiInterChest extends GuiContainer{
     @Override
     protected void keyTyped(char par1, int par2)
     {
-        super.keyTyped(par1, par2);
-        if(par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode()){
-
-        }
         this.textfield.textboxKeyTyped(par1, par2);
+        if(!( par2 ==  Keyboard.KEY_E  &&  this.textfield.isFocused())) super.keyTyped(par1, par2);
     }
 
     @Override
@@ -91,6 +87,7 @@ public class GuiInterChest extends GuiContainer{
         if(org.lwjgl.input.Keyboard.isKeyDown(org.lwjgl.input.Keyboard.KEY_RETURN) || !textfield.isFocused()){
             text = textfield.getText();
             textfield.setFocused(false);
+        //    EntityPlayer.addChatMessage(new ChatComponentText("Text"));
         }
         LogHelper.info("The text is: " + text);
     }

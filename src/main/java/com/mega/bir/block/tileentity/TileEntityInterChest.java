@@ -8,10 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
+import sun.misc.JavaIOAccess;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 
 /**
@@ -21,6 +20,7 @@ import java.io.PrintWriter;
 public class TileEntityInterChest extends TileEntity implements IInventory{
     public static String TextName;
     PrintWriter writer;
+    FileInputStream fstream;
     private ItemStack[] items;
 
     public TileEntityInterChest(){
@@ -100,9 +100,23 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
         return true;
     }
 
+    private void fileRead(String FileName){
+        try {
+            fstream = new FileInputStream(FileName);
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+            while ((strLine = br.readLine()) != null){
+                System.out.println (strLine);
+            }
+            in.close();
+        }catch (IOException ex){
+            LogHelper.warn("Error while reading: " + ex);
+        }
+    }
+
     @Override
     public void writeToNBT(NBTTagCompound compound) {
-//TODO Save Chest text box!
         super.writeToNBT(compound);
         NBTTagList items = new NBTTagList();
         for(int i = 0; i < getSizeInventory(); i++){
@@ -113,9 +127,10 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 stack.writeToNBT(item);
                 items.appendTag(item);
                 try {
-                    writer = new PrintWriter(new FileWriter("NBT-DATA-STUFF.txt", true));
+                    writer = new PrintWriter(new FileWriter(TextName, true));
                     writer.write(stack.getItem().getUnlocalizedName() + " " + stack.stackSize);
                     writer.write('\n');
+                    writer.write(stack.stackSize);
                     writer.close();
                 }catch (IOException ex){
                     LogHelper.warn("Error while writing NBT file: " + ex);
@@ -126,6 +141,9 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
         }
         compound.setTag("Items", items);
         if(TextName != null){
+            compound.setString("Text", TextName);
+        }else if(TextName == null){
+            TextName = "Enter Text Here!";
             compound.setString("Text", TextName);
         }
     }

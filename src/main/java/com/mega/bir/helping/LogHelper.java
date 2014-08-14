@@ -1,6 +1,9 @@
 package com.mega.bir.helping;
 
 import cpw.mods.fml.common.FMLLog;
+import ibxm.Player;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IChatComponent;
 import org.apache.logging.log4j.Level;
 
 /**
