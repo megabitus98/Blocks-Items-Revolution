@@ -3,9 +3,11 @@ package com.mega.bir.client.interfaces.interchest;
 import com.mega.bir.block.tileentity.TileEntityInterChest;
 import com.mega.bir.block.tileentity.TileEntityMachine;
 import com.mega.bir.client.interfaces.machine.ContainerMachine;
+import com.mega.bir.helping.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -36,5 +38,19 @@ public class GuiInterChest extends GuiContainer{
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         fontRendererObj.drawString("Inter Chest", 8, 6, 0x404040);
         fontRendererObj.drawString("Inventory", 10, 66, 0x404040);
+    }
+
+    @Override
+    public void initGui() {
+        super.initGui();
+        buttonList.clear();
+        buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 45, 60, 20, "Sync"));
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button) {
+        if(button.id == 0){
+            LogHelper.info("Button with id 0 HAS BEEN CLICKED!");
+        }
     }
 }

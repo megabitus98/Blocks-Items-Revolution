@@ -1,5 +1,6 @@
 package com.mega.bir.block.tileentity;
 
+import com.mega.bir.helping.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -8,10 +9,16 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
 /**
  * Created by Megabitus on 8/13/2014 and hour 23.
  */
 public class TileEntityInterChest extends TileEntity implements IInventory{
+    PrintWriter writer;
     private ItemStack[] items;
 
     public TileEntityInterChest(){
@@ -91,6 +98,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
+
         super.writeToNBT(compound);
         NBTTagList items = new NBTTagList();
         for(int i = 0; i < getSizeInventory(); i++){
@@ -100,6 +108,16 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 item.setByte("Slot", (byte)i);
                 stack.writeToNBT(item);
                 items.appendTag(item);
+                try {
+                    writer = new PrintWriter(new FileWriter("NBT-DATA-STUFF.txt", true));
+                    writer.write(stack.getItem().getUnlocalizedName() + " " + stack.stackSize);
+                    writer.write('\n');
+                    writer.close();
+                }catch (IOException ex){
+                    LogHelper.warn("Error while writing NBT file: " + ex);
+                }finally {
+                    writer.close();
+                }
             }
         }
         compound.setTag("Items", items);
