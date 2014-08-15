@@ -1,6 +1,7 @@
 package com.mega.bir.helping;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**

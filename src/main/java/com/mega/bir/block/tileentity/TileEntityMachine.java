@@ -1,5 +1,6 @@
 package com.mega.bir.block.tileentity;
 
+import com.mega.bir.helping.ItemHelper;
 import com.mega.bir.helping.LogHelper;
 import com.mega.bir.item.ItemsManager;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import sun.rmi.runtime.Log;
 
 /**
  * Created by Megabitus on 8/11/2014 and hour 23.
@@ -43,11 +45,12 @@ public class TileEntityMachine extends TileEntity implements IInventory{
 
     @Override
     public void updateEntity() {
-        ItemStack itemstack = getStackInSlot(1);
+        ItemStack itemstack = getStackInSlot(0);
         if (searchForBlock(worldObj, xCoord, yCoord, zCoord, Blocks.water)) {
             if (worldObj.isDaytime()) {
-                if(itemstack.getItem().getUnlocalizedName() == ItemsManager.eye.getUnlocalizedName()){
-                    LogHelper.info("Block has found WATER!!! + DAY!!!!! + EYE!!!");
+                if(itemstack !=null){
+                    if(itemstack.getItem() == ItemsManager.eye);
+                    LogHelper.info("O trecut de apa, zi si null!!");
                 }
             }
         }
