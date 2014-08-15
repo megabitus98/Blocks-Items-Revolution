@@ -1,6 +1,7 @@
 item.bir:renamer.name=Renamer
 item.bir:eye.name=Eye
 item.daggerOfSight.name=Dagger Of Sight
+item.bir:catalyst.name=Catalyst
 tile.bir:interChest.name=Inter Chest
 tile.bir:telotriteOre.name=Telotrite Ore
 tile.bir:machine.name=Machine

@@ -9,6 +9,7 @@ public class Names {
     public static final String Item_Renamer = "renamer";
     public static final String Item_Eye = "eye";
     public static final String Item_Dagger_Of_Sight = "daggerOfSight";
+    public static final String Item_Catalyst = "catalyst";
     //Blocks
     public static final String Block_Inter_Chest = "interChest";
     public static final String Block_Telotrite_Ore = "telotriteOre";
