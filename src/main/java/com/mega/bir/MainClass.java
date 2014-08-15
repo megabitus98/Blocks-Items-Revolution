@@ -7,6 +7,7 @@ import com.mega.bir.handler.RegisterHandler;
 import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Reference;
 import com.mega.bir.item.ItemsManager;
+import com.mega.bir.network.PacketHandler;
 import com.mega.bir.proxy.IProxy;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -43,6 +44,7 @@ public class MainClass {
     {
         proxy.registerTileEntities();
         proxy.registerEventHandlers();
+        PacketHandler.initPackets();
         new GuiHandler();
         LogHelper.info("Has passed the Initialization!");
     }
