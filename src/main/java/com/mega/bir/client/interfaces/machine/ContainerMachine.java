@@ -30,7 +30,7 @@ public class ContainerMachine extends Container{
         }
 
         for(int x = 0; x < TileEntityMachine.INVENTORY_SIZE; x++){
-            addSlotToContainer(new Slot(machine, x, 79 + 18 * x, 34));
+            addSlotToContainer(new Slot(machine, x, 30 + 100 * x, 34));
         }
     }
     @Override
