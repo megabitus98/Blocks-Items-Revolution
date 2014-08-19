@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiInterChest extends GuiContainer{
 
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/inter_chest.png");
-    public String text;
+    public String text = "Enter Text Here!";
     private GuiTextField textfield;
 
     public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest machine){

@@ -3,10 +3,13 @@ package com.mega.bir.block.blocks;
 import com.mega.bir.MainClass;
 import com.mega.bir.block.BlockBir;
 import com.mega.bir.block.tileentity.TileEntityInterChest;
+import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Names;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -15,6 +18,7 @@ import net.minecraft.world.World;
  */
 
 public class BlockInterChest extends BlockBir implements ITileEntityProvider {
+    public static String PlayerName;
     public BlockInterChest(){
         super();
         this.setBlockName(Names.Block_Inter_Chest);
@@ -31,5 +35,12 @@ public class BlockInterChest extends BlockBir implements ITileEntityProvider {
             FMLNetworkHandler.openGui(player, MainClass.instance, 1, world, x, y, z);
         }
         return true;
+    }
+    @Override
+    public void onBlockPlacedBy(World world, int par2, int par3, int par4, EntityLivingBase entity, ItemStack itemstack) {
+        if(entity instanceof EntityPlayer){
+            EntityPlayer player = (EntityPlayer) entity;
+            PlayerName = player.getDisplayName();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.mega.bir.block.tileentity;
 
+import com.mega.bir.block.blocks.BlockInterChest;
 import com.mega.bir.helping.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 public class TileEntityInterChest extends TileEntity implements IInventory{
     public static final int INVENTORY_SIZE = 9;
     public static String TextName;
+    private static String PlayerName;
     PrintWriter writer;
     FileInputStream fstream;
     private ItemStack[] items;
@@ -154,12 +156,13 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
    */         }
         }
         compound.setTag("Items", items);
-//        if(TextName != null){
-//            compound.setString("Text", TextName);
-//        }else if(TextName == null || TextName == " "){
+        if(TextName != null){
+            compound.setString("Text", TextName);
+        }else if(TextName == null || TextName == " "){
             TextName = "Enter Text Here!";
-//            compound.setString("Text", TextName);
-//        }
+            compound.setString("Text", TextName);
+        }
+        compound.setString("PlayerName", BlockInterChest.PlayerName);
     }
 
     @Override
@@ -174,11 +177,11 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
             }
         }
-        TextName = compound.getString("Text");
-    }
-
-    @Override
-    public void updateEntity() {
-    //    LogHelper.fatal(containsWhiteSpace(TextName));
+        if(compound.getString("Text") != null || TextName != " "){
+            TextName = compound.getString("Text");
+        }else if(TextName == null || TextName == " "){
+            TextName = "Enter Text Here!";
+        }
+        PlayerName = compound.getString("PlayerName");
     }
 }
