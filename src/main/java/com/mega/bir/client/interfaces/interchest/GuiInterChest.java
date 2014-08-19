@@ -53,9 +53,9 @@ public class GuiInterChest extends GuiContainer{
         textfield = new GuiTextField(this.fontRendererObj, guiLeft + 7, guiTop + 43, 100,20);
         textfield.setFocused(true);
         textfield.setMaxStringLength(16);
-        textfield.setText(text);
         buttonList.clear();
         buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
+        textfield.setText(text);
     }
 
     @Override
