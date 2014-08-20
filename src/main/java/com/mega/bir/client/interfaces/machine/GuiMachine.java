@@ -33,7 +33,7 @@ public class GuiMachine extends GuiContainer{
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Machine", 8, 6, 0x404040);
-        fontRendererObj.drawString("Inventory", 10, 72, 0x404040);
+        fontRendererObj.drawString("Machine", 7, 6, 0x404040);
+        fontRendererObj.drawString("Inventory", 7, 74, 0x404040);
     }
 }

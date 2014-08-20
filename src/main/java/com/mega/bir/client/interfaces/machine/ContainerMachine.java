@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class ContainerMachine extends Container{
     private TileEntityMachine machine;
-    private World worldObj;
-    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 2, 1);
+    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
     public IInventory craftResult = new InventoryCraftResult();
+    private World worldObj;
 
     public ContainerMachine(InventoryPlayer invPlayer, TileEntityMachine machine){
         this.machine = machine;
@@ -31,10 +31,10 @@ public class ContainerMachine extends Container{
                 addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 84 + y * 18));
             }
         }
-        this.addSlotToContainer(new Slot(this.craftMatrix, 0, 30, 34));
-        this.addSlotToContainer(new Slot(this.craftMatrix, 1, 130, 34));
-        this.addSlotToContainer(new SlotCrafting(invPlayer.player, this.craftMatrix, this.craftResult, 2, 79, 34));
-        onCraftMatrixChanged(craftMatrix);
+        this.addSlotToContainer(new SlotCrafting(invPlayer.player, this.craftMatrix, this.craftResult, 0, 79, 41));
+        this.addSlotToContainer(new Slot(machine, 1, 48, 59));
+        this.addSlotToContainer(new Slot(machine, 2, 79, 5));
+        this.addSlotToContainer(new Slot(machine, 3, 112, 59));
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer){
@@ -120,7 +120,7 @@ public class ContainerMachine extends Container{
             ItemStack slotItemStack = slot.getStack();
             itemStack = slotItemStack.copy();
 
-            if (slotIndex < TileEntityInterChest.INVENTORY_SIZE)
+            if (slotIndex < TileEntityInterChest.INVENTORY_SIZE - 1)
             {
 
                 if (!this.mergeItemStack(slotItemStack, 1, inventorySlots.size(), true))
@@ -130,7 +130,7 @@ public class ContainerMachine extends Container{
             }
             else
             {
-                if (!this.mergeItemStack(slotItemStack, 0, TileEntityInterChest.INVENTORY_SIZE, false))
+                if (!this.mergeItemStack(slotItemStack, 0, TileEntityInterChest.INVENTORY_SIZE - 1, false))
                 {
                     return null;
                 }
@@ -147,23 +147,5 @@ public class ContainerMachine extends Container{
         }
 
         return itemStack;
-    }
-    @Override
-    public void onCraftMatrixChanged(IInventory iinventory)
-    {
-    //    craftResult.setInventorySlotContents(0, MachineCraftingManager.getInstance().findMatchingRecipe(craftMatrix, worldObj));
-    }
-    @Override
-    public void onContainerClosed(EntityPlayer entityplayer)
-    {
-            super.onContainerClosed(entityplayer);
-            for(int i = 0; i < TileEntityInterChest.INVENTORY_SIZE; i++)
-            {
-                ItemStack itemstack = craftMatrix.getStackInSlot(i);
-                if(itemstack != null && worldObj.isRemote)
-                {
-                    entityplayer.entityDropItem(itemstack, 0.05F);
-                }
-            }
     }
 }

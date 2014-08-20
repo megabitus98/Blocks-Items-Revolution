@@ -6,6 +6,7 @@ import com.mega.bir.item.ItemsManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,8 +21,10 @@ import sun.rmi.runtime.Log;
  */
 
 public class TileEntityMachine extends TileEntity implements IInventory{
-    public static final int INVENTORY_SIZE = 3;
+    public static final int INVENTORY_SIZE = 4;
     private ItemStack[] items;
+    int i = 0;
+    boolean OK = false;
 
     public TileEntityMachine(){
         items = new ItemStack[INVENTORY_SIZE];
@@ -45,16 +48,25 @@ public class TileEntityMachine extends TileEntity implements IInventory{
 
     @Override
     public void updateEntity() {
-        ItemStack itemstack = getStackInSlot(0);
-        if (searchForBlock(worldObj, xCoord, yCoord, zCoord, Blocks.water)) {
-            if (worldObj.isDaytime()) {
-                if(itemstack !=null){
-                    if(itemstack.getItem() == ItemsManager.eye);
-                    LogHelper.info("O trecut de apa, zi si null!!");
+/*        while((i < this.INVENTORY_SIZE - 1) && (OK == false)) {
+            ItemStack itemstack = getStackInSlot(i);
+            if (itemstack != null) {
+                if (worldObj.isDaytime()) {
+                    if (searchForBlock(worldObj, xCoord, yCoord, zCoord, Blocks.water)) {
+                        if (itemstack.getItem() == ItemsManager.eye);
+                        setInventorySlotContents(3, new ItemStack(Items.ender_pearl));
+                        if(getStackInSlot(3) == null) {
+                            setInventorySlotContents(i, null);
+                            OK=false;
+                            i++;
+                        }else{
+                            OK = true;
+                        }
+                    }
                 }
             }
         }
-    }
+ */   }
 
     @Override
     public int getSizeInventory(){
@@ -153,6 +165,11 @@ public class TileEntityMachine extends TileEntity implements IInventory{
             if(slot >= 0 && slot < getSizeInventory()){
                 setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
             }
+        }
+    }
+    public void searchInSlots(){
+        for(int i = 0; i < this.INVENTORY_SIZE - 1; i++){
+            ItemStack itemstack = getStackInSlot(i);
         }
     }
 }
