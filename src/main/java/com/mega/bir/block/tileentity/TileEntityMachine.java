@@ -20,7 +20,7 @@ import sun.rmi.runtime.Log;
  */
 
 public class TileEntityMachine extends TileEntity implements IInventory{
-    public static final int INVENTORY_SIZE = 2;
+    public static final int INVENTORY_SIZE = 3;
     private ItemStack[] items;
 
     public TileEntityMachine(){

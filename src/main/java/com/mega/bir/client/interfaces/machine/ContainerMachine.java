@@ -28,10 +28,9 @@ public class ContainerMachine extends Container{
                 addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 84 + y * 18));
             }
         }
-
-        for(int x = 0; x < TileEntityMachine.INVENTORY_SIZE; x++){
-            addSlotToContainer(new Slot(machine, x, 30 + 100 * x, 34));
-        }
+        this.addSlotToContainer(new Slot(machine, 0, 30, 34));
+        this.addSlotToContainer(new Slot(machine, 1, 130, 34));
+        this.addSlotToContainer(new Slot(machine, 2, 79, 34));
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer){
