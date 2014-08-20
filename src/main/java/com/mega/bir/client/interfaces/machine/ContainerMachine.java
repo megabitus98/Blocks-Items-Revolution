@@ -36,6 +36,7 @@ public class ContainerMachine extends Container{
         this.addSlotToContainer(new Slot(craftMatrix, 1, 48, 59));
         this.addSlotToContainer(new Slot(craftMatrix, 2, 79, 5));
         this.addSlotToContainer(new Slot(craftMatrix, 3, 112, 59));
+        onCraftMatrixChanged(craftMatrix);
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer){
@@ -166,5 +167,9 @@ public class ContainerMachine extends Container{
                 }
             }
         }
+    }
+    @Override
+    public void onCraftMatrixChanged(IInventory p_75130_1_) {
+        this.craftResult.setInventorySlotContents(0, MachineCraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
     }
 }
