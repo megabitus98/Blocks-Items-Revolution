@@ -8,9 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -26,8 +24,8 @@ public class GuiInterChest extends GuiContainer{
     public String text = "Enter Text Here!";
     private GuiTextField textfield;
 
-    public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest machine){
-        super(new ContainerInterChest(invPlayer, machine));
+    public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest interChest){
+        super(new ContainerInterChest(invPlayer, interChest));
         xSize = 176;
         ySize = 166;
     }
@@ -49,13 +47,16 @@ public class GuiInterChest extends GuiContainer{
     @Override
     public void initGui() {
         super.initGui();
-        text = TileEntityInterChest.TextName;
         textfield = new GuiTextField(this.fontRendererObj, guiLeft + 7, guiTop + 43, 100,20);
         textfield.setFocused(true);
         textfield.setMaxStringLength(16);
         buttonList.clear();
         buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
-        textfield.setText(text);
+        if(text.equals(null) || text.equals("") || text.equals(" ") || text == null || text == "" || text == " "){
+            textfield.setText("Enter Text Here!");
+        }else{
+            textfield.setText(TileEntityInterChest.TextName);
+        }
     }
 
     @Override
