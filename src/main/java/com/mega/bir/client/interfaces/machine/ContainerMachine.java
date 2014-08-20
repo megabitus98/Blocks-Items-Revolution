@@ -156,14 +156,14 @@ public class ContainerMachine extends Container{
     @Override
     public void onContainerClosed(EntityPlayer entityplayer)
     {
-        super.onContainerClosed(entityplayer);
-        for(int i = 0; i < TileEntityInterChest.INVENTORY_SIZE; i++)
-        {
-            ItemStack itemstack = craftMatrix.getStackInSlot(i);
-            if(itemstack != null)
+            super.onContainerClosed(entityplayer);
+            for(int i = 0; i < TileEntityInterChest.INVENTORY_SIZE; i++)
             {
-                entityplayer.entityDropItem(itemstack, 0.05F);
+                ItemStack itemstack = craftMatrix.getStackInSlot(i);
+                if(itemstack != null && worldObj.isRemote)
+                {
+                    entityplayer.entityDropItem(itemstack, 0.05F);
+                }
             }
-        }
     }
 }
