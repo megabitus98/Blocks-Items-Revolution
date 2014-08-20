@@ -6,9 +6,9 @@ import com.mega.bir.block.tileentity.TileEntityMachine;
 import com.mega.bir.helping.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * Created by Megabitus on 8/13/2014 and hour 19.
@@ -16,6 +16,9 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerMachine extends Container{
     private TileEntityMachine machine;
+    private World worldObj;
+    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 2, 1);
+    public IInventory craftResult = new InventoryCraftResult();
 
     public ContainerMachine(InventoryPlayer invPlayer, TileEntityMachine machine){
         this.machine = machine;
@@ -28,9 +31,10 @@ public class ContainerMachine extends Container{
                 addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 84 + y * 18));
             }
         }
-        this.addSlotToContainer(new Slot(machine, 0, 30, 34));
-        this.addSlotToContainer(new Slot(machine, 1, 130, 34));
-        this.addSlotToContainer(new Slot(machine, 2, 79, 34));
+        this.addSlotToContainer(new Slot(this.craftMatrix, 0, 30, 34));
+        this.addSlotToContainer(new Slot(this.craftMatrix, 1, 130, 34));
+        this.addSlotToContainer(new SlotCrafting(invPlayer.player, this.craftMatrix, this.craftResult, 2, 79, 34));
+        onCraftMatrixChanged(craftMatrix);
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer){
@@ -143,5 +147,23 @@ public class ContainerMachine extends Container{
         }
 
         return itemStack;
+    }
+    @Override
+    public void onCraftMatrixChanged(IInventory iinventory)
+    {
+    //    craftResult.setInventorySlotContents(0, MachineCraftingManager.getInstance().findMatchingRecipe(craftMatrix, worldObj));
+    }
+    @Override
+    public void onContainerClosed(EntityPlayer entityplayer)
+    {
+        super.onContainerClosed(entityplayer);
+        for(int i = 0; i < TileEntityInterChest.INVENTORY_SIZE; i++)
+        {
+            ItemStack itemstack = craftMatrix.getStackInSlot(i);
+            if(itemstack != null)
+            {
+                entityplayer.entityDropItem(itemstack, 0.05F);
+            }
+        }
     }
 }
