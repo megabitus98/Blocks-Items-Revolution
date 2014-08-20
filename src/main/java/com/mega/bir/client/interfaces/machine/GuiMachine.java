@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -18,8 +19,8 @@ public class GuiMachine extends GuiContainer{
 
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/machine.png");
 
-    public GuiMachine(InventoryPlayer invPlayer, TileEntityMachine machine){
-        super(new ContainerMachine(invPlayer, machine));
+    public GuiMachine(InventoryPlayer invPlayer, TileEntityMachine machine, World world){
+        super(new ContainerMachine(invPlayer, machine, world));
         xSize = 176;
         ySize = 166;
     }

@@ -28,7 +28,7 @@ public class GuiHandler implements IGuiHandler{
             case 0:
                 TileEntity te = world.getTileEntity(x,y,z);
                 if(te != null && te instanceof TileEntityMachine){
-                    return new ContainerMachine(player.inventory, (TileEntityMachine)te);
+                    return new ContainerMachine(player.inventory, (TileEntityMachine)te, world);
                 }
                 break;
             case 1:
@@ -47,7 +47,7 @@ public class GuiHandler implements IGuiHandler{
             case 0:
                 TileEntity te = world.getTileEntity(x,y,z);
                 if(te != null && te instanceof TileEntityMachine){
-                    return new GuiMachine(player.inventory, (TileEntityMachine)te);
+                    return new GuiMachine(player.inventory, (TileEntityMachine)te, world);
                 }
                 break;
             case 1:

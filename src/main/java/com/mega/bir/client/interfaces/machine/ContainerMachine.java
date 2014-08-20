@@ -16,11 +16,12 @@ import net.minecraft.world.World;
 
 public class ContainerMachine extends Container{
     private TileEntityMachine machine;
-    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
+    public InventoryCrafting craftMatrix = new InventoryCrafting(this, TileEntityMachine.INVENTORY_SIZE, 1);
     public IInventory craftResult = new InventoryCraftResult();
     private World worldObj;
 
-    public ContainerMachine(InventoryPlayer invPlayer, TileEntityMachine machine){
+    public ContainerMachine(InventoryPlayer invPlayer, TileEntityMachine machine, World world){
+        this.worldObj = world;
         this.machine = machine;
         for(int x = 0; x < 9; x++){
             addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 142));
@@ -32,9 +33,9 @@ public class ContainerMachine extends Container{
             }
         }
         this.addSlotToContainer(new SlotCrafting(invPlayer.player, this.craftMatrix, this.craftResult, 0, 79, 41));
-        this.addSlotToContainer(new Slot(machine, 1, 48, 59));
-        this.addSlotToContainer(new Slot(machine, 2, 79, 5));
-        this.addSlotToContainer(new Slot(machine, 3, 112, 59));
+        this.addSlotToContainer(new Slot(craftMatrix, 1, 48, 59));
+        this.addSlotToContainer(new Slot(craftMatrix, 2, 79, 5));
+        this.addSlotToContainer(new Slot(craftMatrix, 3, 112, 59));
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer){
@@ -147,5 +148,23 @@ public class ContainerMachine extends Container{
         }
 
         return itemStack;
+    }
+    @Override
+    public void onContainerClosed(EntityPlayer player)
+    {
+        super.onContainerClosed(player);
+
+        if (!this.worldObj.isRemote)
+        {
+            for (int i = 0; i < TileEntityMachine.INVENTORY_SIZE; ++i)
+            {
+                ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
+
+                if (itemstack != null)
+                {
+                    player.dropPlayerItemWithRandomChoice(itemstack, false);
+                }
+            }
+        }
     }
 }
