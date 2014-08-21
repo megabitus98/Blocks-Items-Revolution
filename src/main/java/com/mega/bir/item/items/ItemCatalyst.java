@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 /**
  * Created by Megabitus on 8/15/2014 and hour 09.
  */
+
 public class ItemCatalyst extends ItemBir {
     public ItemCatalyst() {
         super();
@@ -31,19 +32,15 @@ public class ItemCatalyst extends ItemBir {
                 int i = MathHelper.floor_double(player.posX);
                 int j = MathHelper.floor_double(player.boundingBox.minY - 1);
                 int k = MathHelper.floor_double(player.posZ);
-                Material m = world.getBlock(i, j, k).getMaterial();
-                boolean flag = (m == Material.water);
-                if (flag && player.motionY < 0.0D) {
-                    world.setBlock(i, j, k, BlocksManager.birice);
-                   if(world.getBlock(i - 1, j, k).getMaterial() == Material.water){
-                       world.setBlock(i - 1, j, k, BlocksManager.birice);
-                   }
-                   if(world.getBlock(i + 1, j, k).getMaterial() == Material.water){
-                       world.setBlock(i + 1, j, k, BlocksManager.birice);
-                   }
-
-                    LogHelper.info("Flagu nostru este: " + flag);
-                }
+                if(world.getBlock(i, j, k).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i, j, k, BlocksManager.birice);
+                if(world.getBlock(i + 1, j, k - 1).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i + 1, j, k - 1, BlocksManager.birice);
+                if(world.getBlock(i + 1, j, k).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i + 1, j, k, BlocksManager.birice);
+                if(world.getBlock(i + 1, j, k + 1).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i + 1, j, k + 1, BlocksManager.birice);
+                if(world.getBlock(i, j, k - 1).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i, j, k - 1, BlocksManager.birice);
+                if(world.getBlock(i, j, k + 1).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i, j, k + 1, BlocksManager.birice);
+                if(world.getBlock(i - 1, j, k - 1).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i - 1, j, k - 1, BlocksManager.birice);
+                if(world.getBlock(i - 1, j, k).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i - 1, j, k, BlocksManager.birice);
+                if(world.getBlock(i - 1, j, k + 1).getMaterial() == Material.water && player.motionY < 0.0D)world.setBlock(i - 1, j, k + 1, BlocksManager.birice);
             }
         }
     }

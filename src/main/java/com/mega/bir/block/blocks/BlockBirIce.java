@@ -7,6 +7,7 @@ import com.mega.bir.creativetab.CreativeTabBir;
 import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Names;
 import net.minecraft.block.BlockIce;
+import net.minecraft.block.BlockPackedIce;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,7 @@ import java.util.Random;
  * Created by Nitu on 8/19/2014.
  */
 
-public class BlockBirIce extends BlockIce implements ITileEntityProvider {
+public class BlockBirIce extends BlockPackedIce implements ITileEntityProvider {
     public BlockBirIce(){
         super();
         this.setBlockName(Names.Bir_Ice);

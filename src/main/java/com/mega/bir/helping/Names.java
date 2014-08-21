@@ -18,4 +18,5 @@ public class Names {
     //Tile Entityes
     public static final String Tile_Entity_Machine = "tileEntityMachine";
 	public static final String Tile_Entity_Inter_Chest = "tileEntityInterChest";
+    public static final String Tile_Entity_Bir_Ice = "tileEntityBirIce";
 }
