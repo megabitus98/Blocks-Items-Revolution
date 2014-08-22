@@ -26,9 +26,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
     public static final int INVENTORY_SIZE = 9;
     private ItemStack[] items;
     public String PlayerName = BlockInterChest.PlayerName;
-    public static String ONameP;
     public TileEntityInterChest(){
-        ONameP = PlayerName;
         items = new ItemStack[INVENTORY_SIZE];
     }
 
@@ -96,13 +94,28 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
     public void openInventory(){}
 
     @Override
-    public void closeInventory(){
-
-    }
+    public void closeInventory(){}
 
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_){
         return true;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        //TODO ALSO READ FROM INTERNET THING!?
+        super.readFromNBT(compound);
+        NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+        for(int i = 0; i < items.tagCount(); i++){
+            NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
+            int slot = item.getByte("Slot");
+            if(slot >= 0 && slot < getSizeInventory()){
+                setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+            }
+        }
+        this.PlayerName = compound.getString("Name");
+        LogHelper.info("Am citit: " + compound.getString("Name"));
+   //     addFileItemsToChest();
     }
 
     @Override
@@ -121,21 +134,45 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
         compound.setTag("Items", items);
         LogHelper.info("Am scris: " + this.PlayerName);
         compound.setString("Name", this.PlayerName);
+        addChestItemsToFile(PlayerName);
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        //TODO ALSO READ FROM INTERNET THING!?
-        super.readFromNBT(compound);
-        NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-        for(int i = 0; i < items.tagCount(); i++){
-            NBTTagCompound item = (NBTTagCompound)items.getCompoundTagAt(i);
-            int slot = item.getByte("Slot");
-            if(slot >= 0 && slot < getSizeInventory()){
-                setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+    public void addChestItemsToFile(String playerName){
+        String fileName = "InterChestInventory " + playerName + ".bin";
+        try{
+            File file = new File(fileName);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bufferedWriter = new BufferedWriter(fw);
+            if(!file.exists()){
+                file.createNewFile();
             }
+            for(int acitf = 0; acitf < getSizeInventory(); acitf++){
+                ItemStack stack = getStackInSlot(acitf);
+                if(stack != null) {
+                    String ItemName = stack.getItem() + "\r" + stack.stackSize + "\r";
+                    bufferedWriter.write(ItemName);
+                }
+            }
+            bufferedWriter.close();
+        }catch (IOException e){
+            LogHelper.fatal("Error while making a new InterChest file: " + e);
         }
-        this.PlayerName = compound.getString("Name");
-        LogHelper.info("Am citit: " + compound.getString("Name"));
     }
+
+    public void addFileItemsToChest(String playerName){
+        String fileName = "InterChestInventory " + playerName + ".bin";
+        try{
+            String CurrentLine;
+            BufferedReader br = null;
+            br = new BufferedReader(new FileReader(fileName));
+            for(int afittc = 0; afittc < getSizeInventory() * 2; afittc++){
+                CurrentLine = br.readLine();
+                System.out.println(CurrentLine);
+            }
+            br.close();
+        }catch (IOException e){
+            LogHelper.fatal("Error while reading a InterChest file: " + e);
+        }
+    }
+
 }

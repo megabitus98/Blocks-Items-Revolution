@@ -1,6 +1,5 @@
 package com.mega.bir.client.interfaces.interchest;
 
-import com.mega.bir.block.blocks.BlockInterChest;
 import com.mega.bir.block.tileentity.TileEntityInterChest;
 import com.mega.bir.helping.LogHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -11,9 +10,6 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -61,10 +57,9 @@ public class GuiInterChest extends GuiContainer{
         textfield.setMaxStringLength(16);
         buttonList.clear();
         buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
-        LogHelper.fatal(tileEntityInterChest.ONameP);
-        text = tileEntityInterChest.ONameP;
         LogHelper.fatal(text);
-        textfield.setText(text);
+        //TODO CHANGE
+        //textfield.setText("daps");
     }
 
     @Override
@@ -83,8 +78,10 @@ public class GuiInterChest extends GuiContainer{
     @Override
     protected void actionPerformed(GuiButton button) {
         if(button.id == 0){
-
-            LogHelper.info("Button with id 0 HAS BEEN CLICKED cu mesaju:");
+            button.enabled = true;
+            tileEntityInterChest.addFileItemsToChest(this.player.getDisplayName());
+            button.enabled = false;
+            LogHelper.info("Button with id 0 HAS BEEN CLICKED");
             //TODO Sync with other chests!
         }
     }
@@ -104,5 +101,6 @@ public class GuiInterChest extends GuiContainer{
     public void onGuiClosed() {
         super.onGuiClosed();
         tileEntityInterChest.PlayerName = text;
+        tileEntityInterChest.addChestItemsToFile(player.getDisplayName());
     }
 }

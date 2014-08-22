@@ -1,12 +1,10 @@
 package com.mega.bir;
 
-import com.mega.bir.block.BlocksManager;
 import com.mega.bir.handler.ConfigHandler;
 import com.mega.bir.handler.GuiHandler;
 import com.mega.bir.handler.RegisterHandler;
 import com.mega.bir.helping.LogHelper;
 import com.mega.bir.helping.Reference;
-import com.mega.bir.item.ItemsManager;
 import com.mega.bir.network.PacketHandler;
 import com.mega.bir.proxy.IProxy;
 
@@ -16,8 +14,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.util.EnumHelper;
 
 /**
  * Created by Megabitus on 8/10/2014 and hour 12.
