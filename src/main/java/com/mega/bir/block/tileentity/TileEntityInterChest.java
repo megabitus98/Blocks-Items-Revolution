@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import sun.misc.JavaIOAccess;
+import sun.org.mozilla.javascript.internal.ast.Block;
 
 import java.io.*;
 import java.util.regex.Matcher;
@@ -21,26 +22,14 @@ import java.util.regex.Pattern;
  */
 
 public class TileEntityInterChest extends TileEntity implements IInventory{
+
     public static final int INVENTORY_SIZE = 9;
-    public static String TextName;
-    private static String PlayerName;
-    PrintWriter writer;
-    FileInputStream fstream;
     private ItemStack[] items;
-
+    public String PlayerName = BlockInterChest.PlayerName;
+    public static String ONameP;
     public TileEntityInterChest(){
+        ONameP = PlayerName;
         items = new ItemStack[INVENTORY_SIZE];
-    }
-
-    public static boolean containsWhiteSpace(final String testCode){
-        if(testCode != null){
-            for(int i = 0; i < testCode.length(); i++){
-                if(Character.isWhitespace(testCode.charAt(i))){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Override
@@ -116,53 +105,22 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
         return true;
     }
 
-    private void fileRead(String FileName){
-        try {
-            fstream = new FileInputStream(FileName);
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine;
-            while ((strLine = br.readLine()) != null){
-                System.out.println (strLine);
-            }
-            in.close();
-        }catch (IOException ex){
-            LogHelper.warn("Error while reading: " + ex);
-        }
-    }
-
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         NBTTagList items = new NBTTagList();
         for(int i = 0; i < getSizeInventory(); i++){
             ItemStack stack = getStackInSlot(i);
-            if(stack != null){
+            if(stack != null) {
                 NBTTagCompound item = new NBTTagCompound();
-                item.setByte("Slot", (byte)i);
+                item.setByte("Slot", (byte) i);
                 stack.writeToNBT(item);
                 items.appendTag(item);
- /*               try {
-                    writer = new PrintWriter(new FileWriter(TextName, true));
-                    writer.write(stack.getItem().getUnlocalizedName() + " " + stack.stackSize);
-                    writer.write('\n');
-                    writer.write(stack.stackSize);
-                    writer.close();
-                }catch (IOException ex){
-                    LogHelper.warn("Error while writing NBT file: " + ex);
-                }finally {
-                    writer.close();
-                }
-   */         }
+            }
         }
         compound.setTag("Items", items);
-        if(TextName != null){
-            compound.setString("Text", TextName);
-        }else if(TextName == null || TextName == " "){
-            TextName = "Enter Text Here!";
-            compound.setString("Text", TextName);
-        }
-        compound.setString("PlayerName", BlockInterChest.PlayerName);
+        LogHelper.info("Am scris: " + this.PlayerName);
+        compound.setString("Name", this.PlayerName);
     }
 
     @Override
@@ -177,11 +135,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
                 setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
             }
         }
-        if(compound.getString("Text") != null || TextName != " "){
-            TextName = compound.getString("Text");
-        }else if(TextName == null || TextName == " "){
-            TextName = "Enter Text Here!";
-        }
-        PlayerName = compound.getString("PlayerName");
+        this.PlayerName = compound.getString("Name");
+        LogHelper.info("Am citit: " + compound.getString("Name"));
     }
 }

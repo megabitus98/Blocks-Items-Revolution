@@ -1,5 +1,6 @@
 package com.mega.bir.client.interfaces.interchest;
 
+import com.mega.bir.block.blocks.BlockInterChest;
 import com.mega.bir.block.tileentity.TileEntityInterChest;
 import com.mega.bir.helping.LogHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -8,7 +9,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -21,13 +26,17 @@ import org.lwjgl.opengl.GL11;
 public class GuiInterChest extends GuiContainer{
 
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/inter_chest.png");
-    public String text = "Enter Text Here!";
     private GuiTextField textfield;
+    private final TileEntityInterChest tileEntityInterChest;
+    private EntityPlayer player;
+    public  String text;
 
     public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest interChest){
         super(new ContainerInterChest(invPlayer, interChest));
         xSize = 176;
         ySize = 166;
+        player = invPlayer.player;
+        this.tileEntityInterChest = interChest;
     }
 
     @Override
@@ -52,11 +61,10 @@ public class GuiInterChest extends GuiContainer{
         textfield.setMaxStringLength(16);
         buttonList.clear();
         buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
-        if(text.equals(null) || text.equals("") || text.equals(" ") || text == null || text == "" || text == " "){
-            textfield.setText("Enter Text Here!");
-        }else{
-            textfield.setText(TileEntityInterChest.TextName);
-        }
+        LogHelper.fatal(tileEntityInterChest.ONameP);
+        text = tileEntityInterChest.ONameP;
+        LogHelper.fatal(text);
+        textfield.setText(text);
     }
 
     @Override
@@ -75,7 +83,8 @@ public class GuiInterChest extends GuiContainer{
     @Override
     protected void actionPerformed(GuiButton button) {
         if(button.id == 0){
-            LogHelper.info("Button with id 0 HAS BEEN CLICKED!");
+
+            LogHelper.info("Button with id 0 HAS BEEN CLICKED cu mesaju:");
             //TODO Sync with other chests!
         }
     }
@@ -88,13 +97,12 @@ public class GuiInterChest extends GuiContainer{
         if(org.lwjgl.input.Keyboard.isKeyDown(org.lwjgl.input.Keyboard.KEY_RETURN) || !textfield.isFocused()){
             text = textfield.getText();
             textfield.setFocused(false);
-            LogHelper.info("The text is: " + text);
         }
     }
 
     @Override
     public void onGuiClosed() {
         super.onGuiClosed();
-        TileEntityInterChest.TextName = text;
+        tileEntityInterChest.PlayerName = text;
     }
 }
