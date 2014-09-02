@@ -9,12 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
-import sun.misc.JavaIOAccess;
-import sun.org.mozilla.javascript.internal.ast.Block;
-
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -114,8 +108,7 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
             }
         }
         this.PlayerName = compound.getString("Name");
-        LogHelper.info("Am citit: " + compound.getString("Name"));
-   //     addFileItemsToChest();
+
     }
 
     @Override
@@ -132,47 +125,6 @@ public class TileEntityInterChest extends TileEntity implements IInventory{
             }
         }
         compound.setTag("Items", items);
-        LogHelper.info("Am scris: " + this.PlayerName);
         compound.setString("Name", this.PlayerName);
-        addChestItemsToFile(PlayerName);
     }
-
-    public void addChestItemsToFile(String playerName){
-        String fileName = "InterChestInventory " + playerName + ".bin";
-        try{
-            File file = new File(fileName);
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bufferedWriter = new BufferedWriter(fw);
-            if(!file.exists()){
-                file.createNewFile();
-            }
-            for(int acitf = 0; acitf < getSizeInventory(); acitf++){
-                ItemStack stack = getStackInSlot(acitf);
-                if(stack != null) {
-                    String ItemName = stack.getItem() + "\r" + stack.stackSize + "\r";
-                    bufferedWriter.write(ItemName);
-                }
-            }
-            bufferedWriter.close();
-        }catch (IOException e){
-            LogHelper.fatal("Error while making a new InterChest file: " + e);
-        }
-    }
-
-    public void addFileItemsToChest(String playerName){
-        String fileName = "InterChestInventory " + playerName + ".bin";
-        try{
-            String CurrentLine;
-            BufferedReader br = null;
-            br = new BufferedReader(new FileReader(fileName));
-            for(int afittc = 0; afittc < getSizeInventory() * 2; afittc++){
-                CurrentLine = br.readLine();
-                System.out.println(CurrentLine);
-            }
-            br.close();
-        }catch (IOException e){
-            LogHelper.fatal("Error while reading a InterChest file: " + e);
-        }
-    }
-
 }

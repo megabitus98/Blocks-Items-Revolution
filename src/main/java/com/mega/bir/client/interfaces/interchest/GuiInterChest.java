@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
@@ -24,14 +23,12 @@ public class GuiInterChest extends GuiContainer{
     private static final ResourceLocation texture = new ResourceLocation("bir", "textures/gui/inter_chest.png");
     private GuiTextField textfield;
     private final TileEntityInterChest tileEntityInterChest;
-    private EntityPlayer player;
     public  String text;
 
     public GuiInterChest(InventoryPlayer invPlayer, TileEntityInterChest interChest){
         super(new ContainerInterChest(invPlayer, interChest));
         xSize = 176;
         ySize = 166;
-        player = invPlayer.player;
         this.tileEntityInterChest = interChest;
     }
 
@@ -51,15 +48,15 @@ public class GuiInterChest extends GuiContainer{
 
     @Override
     public void initGui() {
+        text = tileEntityInterChest.PlayerName;
         super.initGui();
         textfield = new GuiTextField(this.fontRendererObj, guiLeft + 7, guiTop + 43, 100,20);
         textfield.setFocused(true);
         textfield.setMaxStringLength(16);
         buttonList.clear();
         buttonList.add(new GuiButton(0, guiLeft + 111, guiTop + 43, 60, 20, "Sync"));
-        LogHelper.fatal(text);
         //TODO CHANGE
-        //textfield.setText("daps");
+        textfield.setText(text);
     }
 
     @Override
@@ -79,7 +76,6 @@ public class GuiInterChest extends GuiContainer{
     protected void actionPerformed(GuiButton button) {
         if(button.id == 0){
             button.enabled = true;
-            tileEntityInterChest.addFileItemsToChest(this.player.getDisplayName());
             button.enabled = false;
             LogHelper.info("Button with id 0 HAS BEEN CLICKED");
             //TODO Sync with other chests!
@@ -101,6 +97,5 @@ public class GuiInterChest extends GuiContainer{
     public void onGuiClosed() {
         super.onGuiClosed();
         tileEntityInterChest.PlayerName = text;
-        tileEntityInterChest.addChestItemsToFile(player.getDisplayName());
     }
 }
